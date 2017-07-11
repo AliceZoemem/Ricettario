@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ingredient extends Model
 {
     protected $table='ingredients';
-    protected $fillable= ['name','priority'];
+    protected $fillable= ['name'];
     //c e ne e un altro $hidden
     public function recipes()
     {

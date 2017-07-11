@@ -3,7 +3,7 @@
 <html>
 
     <head>
-        <title>Laravel</title>
+        <title>Ricette</title>
     </head>
 
     <body>
