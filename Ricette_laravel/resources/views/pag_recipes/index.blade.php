@@ -3,10 +3,12 @@
 @section('title','Cerca Ricette - Il mio frigo')
 
 @section('content')
-    <div class="aggiungi">
+
+
+    <div class="aggiungi" >
         <label for="ingrediente">Ingrediente:</label>
         <input type="text" name="ing" id="ingrediente" style="height: 30px; width: 300px;">
-
+        <input id="token_invisible" type="hidden" value="{{ csrf_token() }}">
         <button type="add" id="button_add" style="font-size: 17px" onclick="aggiungi()">ADD</button>
     </div>
 
@@ -18,7 +20,7 @@
         <p id="avvia" style="font-size:24px">Avvia la ricerca:</p>
     </div>
 
-<script type="text/javascript">
+    <script type="text/javascript">
         var globalIngredients=<?php
             $str = '[';
             foreach($ingredientifromdb as $ingrediente){
@@ -28,5 +30,5 @@
             $str.=']';
             echo $str;
         ?>;
-</script>
+    </script>
 @endsection

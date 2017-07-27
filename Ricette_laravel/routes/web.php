@@ -10,47 +10,31 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Database\Eloquent\Model;
 
 
 Route::get('crawler', 'Crawler@getrecipes');
 
-
 Route::get('/', 'Home@getingredients');
 
+Route::post('give_ingredient' , 'Home@giveingredient');
+
+Route::post('send_results' , 'Home@print_results');
+//public function print_results(){
+//    $id_ingredients = $_POST['ids_recipes'];
+//    return view('pag_recipes.results', ['id_ingredients_finded' => $id_ingredients]);
+//}
 Route::get('results', function () {
     return view('pag_recipes.results');
 });
+/*Route::get('api/ingredients', 'ApiController@getIngredients');
 
-Route::get('api/recipes/{number?}', 'ApiController@getRecipes');
+Route::post('api/pivot', 'ApiController@get_ingredients_id');
+*/
 
-Route::get('api/ingredients', 'ApiController@getIngredients');
-
-Route::get('api/pivot', 'ApiController@getPivot');
-
-Route::get('all', function () {
-    return view('pag_recipes.all');
-});
+Route::get('all', 'Home@getallrecipes');
 
 Route::get('oneperson', function () {
     return view('pag_recipes.recipesforone');
 });
 
-Route::get('1', function () {
-    return view('pag_recipes.firstlastrecipe');
-});
-
-Route::get('2', function () {
-    return view('pag_recipes.secondlastrecipe');
-});
-
-Route::get('3', function () {
-    return view('pag_recipes.thirdlastrecipe');
-});
-
-Route::get('4', function () {
-    return view('pag_recipes.fourthlastrecipe');
-});
-
-Route::get('5', function () {
-    return view('pag_recipes.fifthlastrecipe');
-});

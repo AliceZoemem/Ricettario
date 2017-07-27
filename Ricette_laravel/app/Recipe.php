@@ -13,4 +13,13 @@ class Recipe extends Model
     {
         return $this->belongsToMany('App\Ingredient');
     }
+
+    public function ingredients_id($id = null){
+        if($id != null){
+            return $this->belongsToMany('App\Ingredient');
+        }
+    }
+
+
 }
+

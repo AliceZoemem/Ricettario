@@ -12,7 +12,40 @@
         public function getrecipes(){
             $ricette_ottenute = 0;
             $id_ricette = array();
-            $vett_cibi=array('pasta', 'pizza', 'insalata', 'pollo', 'riso', 'torta', 'zuppa', 'verdura', 'pesce', 'formaggio', 'patate', 'spinaci', 'porchetta', 'spigola', 'tonno', 'salsiccia', 'prosciutto', 'pomodori', 'gamberetti', 'limone', 'ceci', 'legumi', 'farina', 'minestra', 'fragole' , 'cocco', 'frutta', 'gelato', 'mousse', 'vegano');
+            $vett_cibi=array(
+                'pasta',
+                'pizza',
+                'insalata',
+                'pollo',
+                'riso',
+                'torta',
+                'zuppa',
+                'verdura',
+                'pesce',
+                'formaggio',
+                'patate',
+                'spinaci',
+                'porchetta',
+                'spigola',
+                'tonno',
+                'salsiccia',
+                'prosciutto',
+                'pomodori',
+                'gamberetti',
+                'limone',
+                'ceci',
+                'legumi',
+                'farina',
+                'minestra',
+                'fragole' ,
+                'cocco',
+                'frutta',
+                'gelato',
+                'mousse',
+                'vegano',
+                'maiale',
+                'anatra'
+            );
             foreach($vett_cibi as $cibo) {
                 $url = 'http://www.giallozafferano.it/ricerca-ricette/' . $cibo;
                 $crawler_ricerche = Goutte::request('GET', $url);
