@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Ingredient;
 use App\Recipe;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\In;
 use DOMDocument;
@@ -10,6 +11,17 @@ use DOMDocument;
 
 class Home extends Controller
 {
+
+    public function ing_db(){
+        $ingredienti = Ingredient::all();
+        $ingrediente_inserito = $_POST['ingredient'];
+        foreach ($ingredienti as $ing){
+            if($ing->name == $ingrediente_inserito){
+                return 'si';
+            }
+        }
+        return 'no';
+    }
 
     public function getingredients(){
         $item_ingredienti = Ingredient::all();
@@ -38,6 +50,28 @@ class Home extends Controller
         $id_ingredients = $_POST['ids_recipes'];
         return view('pag_recipes.results', [
             'idingredientsfinded' => $id_ingredients]);
+    }
+
+    public function stamponerecipe($number = null){
+        if($number != null){
+            $myfile = fopen("../resources/views/pag_recipes/singlerecipe.blade.php", "r+")or die("Unable to open file!");
+                while(!feof($myfile)) {
+                    $riga = fgets($myfile);
+                    if(strpos($riga, '<div id=') > 0){
+                        $div_results = '<h1>'.Recipe::find($number)->name_recipe.'</h1>'.
+                            '<li> difficolta: '.Recipe::find($number)->difficulty.'</li>'.
+                            '<li> dosi: '.Recipe::find($number)->doses_per_person.'</li>'.
+                            '<li> tempo di cottura: '.Recipe::find($number)->cooking_time.'</li>'.
+                            '<li> tempo di preparazione: '.Recipe::find($number)->preparation_time.'</li>'.
+                            '<h3> Preparazione: </h3>'.
+                            '<p>'.Recipe::find($number)->description.'</p>'.
+                            '</br></br>@endsection'
+                        ;
+                        fwrite($myfile, $div_results);
+                    }
+                }
+            fclose($myfile);
+        }
     }
 
     public function giveingredient(){
@@ -82,9 +116,31 @@ class Home extends Controller
 
         }
 
-        $doc = new DOMDocument();
-        $doc->load('http://ricette_ricette_ricette.com/results');
-        dd($doc);
+        $myfile = fopen("../resources/views/pag_recipes/results.blade.php", "r+")or die("Unable to open file!");
+            while(!feof($myfile)) {
+                $riga = fgets($myfile);
+                if(strpos($riga, '<div id=') > 0){
+                    foreach ($vett_ids_recipes_finded as $result){
+                        $div_results = '<h1><a href="singlerecipe/'.$result.'">'.'<u>'.Recipe::find($result)->name_recipe.'</u>'.'</a></h1>'.
+                            '<li> difficolta: '.Recipe::find($result)->difficulty.'</li>'.
+                            '<li> dosi: '.Recipe::find($result)->doses_per_person.'</li>'.
+                            '<li> tempo di cottura: '.Recipe::find($result)->cooking_time.'</li>'.
+                            '<li> tempo di preparazione: '.Recipe::find($result)->preparation_time.'</li>'.
+                            '<h3> Preparazione: </h3>'.
+                            '<p>'.Recipe::find($result)->description.'</p>'.
+                            '</br></br></div>@endsection'
+                        ;
+
+                        fwrite($myfile, $div_results);
+                    }
+                }
+            }
+        fclose($myfile);
+
+
+        //$doc = new DOMDocument();
+        //$doc->load('http://ricette_ricette_ricette.com/results');
+        //dd($doc);
         //        dd($vett_ids_recipes_finded);
         //        return response()->json([
         //            'status' => 'ok',
@@ -92,52 +148,4 @@ class Home extends Controller
         return $vett_ids_recipes_finded;
     }
 }
-/*
- $dom = new DOMDocument();
-$dom->loadHTMLFile("html/signinform.html");//loads file here
-$form = $dom->getElementsByTagName("form")->item(0);
-$div = $dom->createElement("div");
-$dom->appendChild($div)->appendChild($form);
-echo $dom->saveHTML();
 
-$dom = new DOMDocument();
-$dom->loadHTMLFile("assets/dom_document-form.html");
-$div = $dom->createElement("div");
-$form = $dom->getElementsByTagName("form")->item(0);
-$form->appendChild($div);
-echo $dom->saveHTML();
-
- require('http://ricette_ricette_ricette.com/all');
-
-        $html = '
-            <div>
-                mydiv
-                <ul>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                </ul>
-            </div>';
-
-// intialize new DOM from markup
-        phpQuery::newDocument($markup)
-            ->find('ul > li')
-            ->addClass('my-new-class')
-            ->filter(':last')
-            ->addClass('last-li');
-
-// query all unordered lists in last used DOM
-        pq('ul')->insertAfter('div');
-
-// iterate all LIs from last used DOM
-//        foreach(pq('li') as $li) {
-//            // iteration returns plain DOM nodes, not phpQuery objects
-//            pq($li)->addClass('my-second-new-class');
-//        }
-
-// same as pq('anything')->htmlOuter()
-// but on document root (returns doctype etc)
-        print phpQuery::getDocument();
-        dd('stop');
-
-*/

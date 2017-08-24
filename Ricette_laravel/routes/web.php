@@ -17,6 +17,8 @@ Route::get('crawler', 'Crawler@getrecipes');
 
 Route::get('/', 'Home@getingredients');
 
+Route::post('ingredients_database' , 'Home@ing_db');
+
 Route::post('give_ingredient' , 'Home@giveingredient');
 
 Route::post('send_results' , 'Home@print_results');
@@ -27,6 +29,8 @@ Route::post('send_results' , 'Home@print_results');
 Route::get('results', function () {
     return view('pag_recipes.results');
 });
+
+Route::get('singlerecipe/{number}', 'Home@stamponerecipe');
 /*Route::get('api/ingredients', 'ApiController@getIngredients');
 
 Route::post('api/pivot', 'ApiController@get_ingredients_id');

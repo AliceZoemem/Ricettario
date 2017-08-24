@@ -5,6 +5,4 @@
     <div id="tutte_ricette" >
 
     </div>
-
-
 @endsection

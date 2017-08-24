@@ -12,18 +12,28 @@ html {
     background-size: cover;
 }
 
+html, body{
+    margin: 0;
+    padding: 0;
+}
+.corpo{
+    text-align: center;
+}
 #corpo_testo{
     margin-top: 2%;
 }
-#ingrediente{
-}
+
 #inserisci_ingredienti{
     background-color: ghostwhite;
     font-size: 24px;
+    text-align: center;
     width: auto;
-    margin-left: 10%;
-    margin-right: 50%;
     color: darkslategrey;
+}
+
+.ui-helper-hidden-accessible{
+    text-align: center;
+    display: none;
 }
 
 #rightmenu{
@@ -33,7 +43,6 @@ html {
     overflow: hidden;
     background-color: #333;
 }
-
 .rightm a {
     display: block;
     color: #f2f2f2;
@@ -42,12 +51,10 @@ html {
     text-decoration: none;
     font-size: 17px;
 }
-
 .rightm a:hover {
     background-color: #ddd;
     color: black;
 }
-
 .rightm .icon {
     display: none;
 }
@@ -79,7 +86,6 @@ html {
     overflow: hidden;
     background-color: #333;
 }
-
 .topmenu a {
     float: left;
     display: block;
@@ -89,12 +95,10 @@ html {
     text-decoration: none;
     font-size: 17px;
 }
-
 .topmenu a:hover {
     background-color: #ddd;
     color: black;
 }
-
 .topmenu .icon {
     display: none;
 }
