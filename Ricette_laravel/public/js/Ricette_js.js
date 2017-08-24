@@ -82,6 +82,7 @@ function crea(new_ingredient, ingredienti_inseriti) {
         var crea_bottone = document.createElement("BUTTON");
         var scritta_bottone = document.createTextNode('x');
         crea_bottone.setAttribute("id", "btn" + i);
+        crea_bottone.setAttribute("style", "font-size: 13px");
         crea_bottone.setAttribute("onclick", "rimuovi(" + i + ")");
         crea_bottone.appendChild(scritta_bottone);
         document.getElementById("ing" + i).insertBefore(crea_bottone,document.getElementById("btn" + i));
@@ -114,10 +115,9 @@ function rimuovi(i) {
 function cerca_ricetta(){
     var token_page = document.getElementById('token_invisible').value;
     $.post("give_ingredient" , {_token: token_page, 'ingredients' : ingredienti_inseriti}, function (ids_ricette){
-        alert('passato');
-        location.replace('results');
+
     });
-    alert('fine');
+
     location.replace('results');
 
 }

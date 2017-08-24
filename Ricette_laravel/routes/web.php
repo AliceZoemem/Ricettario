@@ -31,6 +31,10 @@ Route::get('results', function () {
 });
 
 Route::get('singlerecipe/{number}', 'Home@stamponerecipe');
+
+Route::get('recipe', function () {
+    return view('pag_recipes.singlerecipe');
+});
 /*Route::get('api/ingredients', 'ApiController@getIngredients');
 
 Route::post('api/pivot', 'ApiController@get_ingredients_id');

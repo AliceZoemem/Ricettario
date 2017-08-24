@@ -1,5 +1,9 @@
 <section class="menualto">
     <div class="topmenu" id="Menu">
+        <ul class="nav navbar-nav navbar-left">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
         <a href="/">Home</a></li>
         <a href="all">Tutte le ricette</a>
         <a href="oneperson">Ricette per 1</a>

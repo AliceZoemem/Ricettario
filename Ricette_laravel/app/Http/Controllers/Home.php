@@ -54,7 +54,9 @@ class Home extends Controller
 
     public function stamponerecipe($number = null){
         if($number != null){
+
             $myfile = fopen("../resources/views/pag_recipes/singlerecipe.blade.php", "r+")or die("Unable to open file!");
+            ftruncate($myfile, 114);
                 while(!feof($myfile)) {
                     $riga = fgets($myfile);
                     if(strpos($riga, '<div id=') > 0){
@@ -65,12 +67,15 @@ class Home extends Controller
                             '<li> tempo di preparazione: '.Recipe::find($number)->preparation_time.'</li>'.
                             '<h3> Preparazione: </h3>'.
                             '<p>'.Recipe::find($number)->description.'</p>'.
-                            '</br></br>@endsection'
+                            ' </br> </br>'
                         ;
                         fwrite($myfile, $div_results);
                     }
                 }
+                fwrite($myfile, '</div>@endsection');
             fclose($myfile);
+
+            return view('pag_recipes.singlerecipe');
         }
     }
 
@@ -117,34 +122,26 @@ class Home extends Controller
         }
 
         $myfile = fopen("../resources/views/pag_recipes/results.blade.php", "r+")or die("Unable to open file!");
-            while(!feof($myfile)) {
-                $riga = fgets($myfile);
-                if(strpos($riga, '<div id=') > 0){
-                    foreach ($vett_ids_recipes_finded as $result){
-                        $div_results = '<h1><a href="singlerecipe/'.$result.'">'.'<u>'.Recipe::find($result)->name_recipe.'</u>'.'</a></h1>'.
-                            '<li> difficolta: '.Recipe::find($result)->difficulty.'</li>'.
-                            '<li> dosi: '.Recipe::find($result)->doses_per_person.'</li>'.
-                            '<li> tempo di cottura: '.Recipe::find($result)->cooking_time.'</li>'.
-                            '<li> tempo di preparazione: '.Recipe::find($result)->preparation_time.'</li>'.
-                            '<h3> Preparazione: </h3>'.
-                            '<p>'.Recipe::find($result)->description.'</p>'.
-                            '</br></br></div>@endsection'
-                        ;
+        ftruncate($myfile, 117);
+        while(!feof($myfile)) {
+            $riga = fgets($myfile);
+            if(strpos($riga, '<div id=') > 0){
+                foreach ($vett_ids_recipes_finded as $result){
+                    $div_results = '<h1><a href="singlerecipe/'.$result.'">'.'<u>'.Recipe::find($result)->name_recipe.'</u>'.'</a></h1>'.
+                        '<li> difficolta: '.Recipe::find($result)->difficulty.'</li>'.
+                        '<li> dosi: '.Recipe::find($result)->doses_per_person.'</li>'.
+                        '<li> tempo di cottura: '.Recipe::find($result)->cooking_time.'</li>'.
+                        '<li> tempo di preparazione: '.Recipe::find($result)->preparation_time.'</li>'.
+                        '</br>'
+                    ;
 
-                        fwrite($myfile, $div_results);
-                    }
+                    fwrite($myfile, $div_results);
                 }
             }
+        }
+        fwrite($myfile, '</div>@endsection');
         fclose($myfile);
 
-
-        //$doc = new DOMDocument();
-        //$doc->load('http://ricette_ricette_ricette.com/results');
-        //dd($doc);
-        //        dd($vett_ids_recipes_finded);
-        //        return response()->json([
-        //            'status' => 'ok',
-        //            'ids_ricette' => $vett_ids_recipes_finded]);
         return $vett_ids_recipes_finded;
     }
 }
