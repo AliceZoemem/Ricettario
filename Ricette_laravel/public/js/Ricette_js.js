@@ -5,6 +5,7 @@ var apparsa_div_ingredienti = false;
 var ingredienti_inseriti = Array();
 var inizio = true;
 var slide = true;
+var i= 0;
 
 $(document).ready(function() {
     $( "#ingrediente" ).autocomplete({
@@ -23,6 +24,7 @@ function start(){
     document.getElementById('inserisci_ingredienti').style.visibility= 'hidden';
     document.getElementById('inserisci_ingredienti').style.display='none';
     document.getElementById('ingrediente').value = 'Aggiungi un ingrediente...';
+    $.get("rightmenu" , {_token: token_page}, function (randomrecipes){});
     i = 0;
 }
 
@@ -77,8 +79,10 @@ function crea(new_ingredient, ingredienti_inseriti) {
         var crea_label = document.createElement("LI");
         var scritta_label = document.createTextNode(new_ingredient);
         crea_label.setAttribute("id", "ing" + i);
+        crea_label.setAttribute("class", "ingrediente_inserito");
         crea_label.appendChild(scritta_label);
         document.getElementById("lista_ing").insertBefore(crea_label,document.getElementById("ing" + i));
+
         var crea_bottone = document.createElement("BUTTON");
         var scritta_bottone = document.createTextNode('x');
         crea_bottone.setAttribute("id", "btn" + i);

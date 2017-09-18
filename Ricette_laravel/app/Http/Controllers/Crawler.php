@@ -76,6 +76,7 @@
                     //salto
                     // salvo ing e id
 
+
                     $vett_pivot_ricette = array();
                     $array_ingredienti = get_ingredients($html);
                     $array_id_ingredienti = get_id_ingredients($array_ingredienti, $html, $array_ingredienti);
@@ -129,7 +130,8 @@
                     $descrizione = substr_replace (preparazione($prendi_pagina),'', 0, strpos(preparazione($prendi_pagina), '£'));
                     $descrizione = str_replace("£ ", "", $descrizione);
                     $vett_requisiti['description'] = $descrizione;
-                    $controlla_inserimento = Recipe::where('difficulty', $vett_requisiti['difficulty'])->where('preparation_time', $vett_requisiti['preparation_time'])->where('cooking_time', $vett_requisiti['cooking_time'])->where('doses_per_person', $vett_requisiti['doses_per_person'])->where('description', $vett_requisiti['description'])->get();
+                    $vett_requisiti['recipe_img'] = ricetta_img($prendi_pagina);
+                    $controlla_inserimento = Recipe::where('difficulty', $vett_requisiti['difficulty'])->where('preparation_time', $vett_requisiti['preparation_time'])->where('cooking_time', $vett_requisiti['cooking_time'])->where('doses_per_person', $vett_requisiti['doses_per_person'])->where('description', $vett_requisiti['description'])->where('recipe_img', $vett_requisiti['recipe_img'])->get();
                     if($controlla_inserimento->isEmpty()){
                         $ricetta = new Recipe();
                         $ricetta->difficulty = strtolower($vett_requisiti['difficulty']);
@@ -138,6 +140,8 @@
                         $ricetta->doses_per_person = strtolower($vett_requisiti['doses_per_person']);
                         $ricetta->name_recipe = strtolower($vett_requisiti['name_recipe']);
                         $ricetta->description = strtolower($vett_requisiti['description']);
+                        $ricetta->recipe_img = $vett_requisiti['recipe_img'];
+
                         $ricetta->save();
 
                         $vett_amount = quantita_ingredienti($html_ricerca, $array_ingredienti);
@@ -180,6 +184,14 @@
             $descrizione = $descrizione . ' ' .$parte_preparazione;
         }
         return $descrizione;
+    }
+
+    function ricetta_img($prendi_pagina){
+        $link_img = '';
+        $ricetta_img = $prendi_pagina->filter('img')->attr("src");
+
+        if($ricetta_img != null)
+            return $ricetta_img;
     }
 
 
@@ -260,6 +272,7 @@
         }
 
     }
+
 
 /*
  $link = $crawler->selectLink('Security Advisories')->link();

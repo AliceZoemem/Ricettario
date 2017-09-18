@@ -230,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         //per prelevare info dal dom
         'HTMLDomParser' => Ammadeuss\LaravelHtmlDomParser\Facade::class,
+//        'Home'=>  App\Http\Controllers\Home::class,
     ],
 	
 ];

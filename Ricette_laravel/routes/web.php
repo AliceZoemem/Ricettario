@@ -30,6 +30,8 @@ Route::get('results', function () {
     return view('pag_recipes.results');
 });
 
+Route::get('rightmenu', 'Home@getrandomrecipes');
+
 Route::get('singlerecipe/{number}', 'Home@stamponerecipe');
 
 Route::get('recipe', function () {
@@ -42,7 +44,9 @@ Route::post('api/pivot', 'ApiController@get_ingredients_id');
 
 Route::get('all', 'Home@getallrecipes');
 
-Route::get('oneperson', function () {
-    return view('pag_recipes.recipesforone');
+Route::get('allrecipes', function(){
+   return view('pag_recipes.all');
 });
+
+Route::get('twopeople', 'Home@fortwopeople');
 

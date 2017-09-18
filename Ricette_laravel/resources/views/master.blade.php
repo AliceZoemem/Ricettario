@@ -20,11 +20,15 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ URL::asset('/css/Ricette_stile.css') }}" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="{{ asset('/js/Ricette_js.js') }}"></script>
         <title>@yield('title')</title>
     </head>
 
     <body onload="start()">
+
+        {{--{{Home::getrandomrecipes()}}--}}
+        {{--<script>window.location = "/rightmenu";</script>--}}
         @include('pag_recipes.rightmenu')
         @include('pag_recipes.header')
         <div class="intro"> Il mio frigo</div>
