@@ -127,6 +127,9 @@ img{
         right: 0;
         top: 0;
     }
+    /*.homo{*/
+        /**/
+    /*}*/
     .rightm.responsive a {
         float: right;
         display: block;
@@ -210,4 +213,9 @@ img{
 }
 .container_footer .text-muted {
     margin: 10px 0;
+}
+
+#search{
+    text-align: center;
+
 }

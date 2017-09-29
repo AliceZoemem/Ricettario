@@ -38,12 +38,12 @@ class Home extends Controller
     public function getallrecipes(){
         $ricette = Recipe::all();
         $myfile = fopen("../resources/views/pag_recipes/all.blade.php", "r+")or die("Unable to open file!");
-        ftruncate($myfile, 121);
+        ftruncate($myfile, 586);
         while(!feof($myfile)) {
             $riga = fgets($myfile);
             if(strpos($riga, '<div id=') > 0){
                 foreach ($ricette as $ricetta){
-                    $div_results = '<h1><a href="singlerecipe/'.$ricetta['id'].'">'.'<u>'.Recipe::find($ricetta['id'])->name_recipe.'</u>'.'</a></h1>'.
+                    $div_results = '</br><h1><a href="singlerecipe/'.$ricetta['id'].'">'.'<u>'.Recipe::find($ricetta['id'])->name_recipe.'</u>'.'</a></h1>'.
                         '<img src="'.Recipe::find($ricetta['id'])->recipe_img. '" alt="'.Recipe::find($ricetta['id'])->name_recipe.'">'.
                         '<li> difficolta: '.Recipe::find($ricetta['id'])->difficulty.'</li>'.
                         '<li> dosi: '.Recipe::find($ricetta['id'])->doses_per_person.'</li>'.
@@ -97,7 +97,7 @@ class Home extends Controller
             array_push($vett , rand(1 , Recipe::count()));
         }
         $myfile = fopen("../resources/views/pag_recipes/rightmenu.blade.php", "r+")or die("Unable to open file!");
-        ftruncate($myfile, 235);
+        ftruncate($myfile, 102);
         while(!feof($myfile)) {
             $riga = fgets($myfile);
             if(strpos($riga, '<div id=') > 0){
@@ -188,7 +188,6 @@ class Home extends Controller
             }
 
         }
-
         $myfile = fopen("../resources/views/pag_recipes/results.blade.php", "r+")or die("Unable to open file!");
         ftruncate($myfile, 117);
         while(!feof($myfile)) {
@@ -208,8 +207,10 @@ class Home extends Controller
                 }
             }
         }
+
         fwrite($myfile, '</div>@endsection');
         fclose($myfile);
+
         return view('/pag_recipes.results');
     }
 }

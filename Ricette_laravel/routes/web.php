@@ -41,6 +41,9 @@ Route::get('recipe', function () {
 
 Route::post('api/pivot', 'ApiController@get_ingredients_id');
 */
+Route::get('contact', function(){
+    return view('pag_recipes.contact');
+});
 
 Route::get('all', 'Home@getallrecipes');
 
@@ -50,3 +53,10 @@ Route::get('allrecipes', function(){
 
 Route::get('twopeople', 'Home@fortwopeople');
 
+Route::get('signup', function(){
+    return view('pag_recipes.signup');
+});
+
+Route::get('login', function(){
+    return view('pag_recipes.login');
+});
