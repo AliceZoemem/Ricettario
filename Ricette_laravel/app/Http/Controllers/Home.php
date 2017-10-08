@@ -97,7 +97,7 @@ class Home extends Controller
             array_push($vett , rand(1 , Recipe::count()));
         }
         $myfile = fopen("../resources/views/pag_recipes/rightmenu.blade.php", "r+")or die("Unable to open file!");
-        ftruncate($myfile, 102);
+        ftruncate($myfile, 111);
         while(!feof($myfile)) {
             $riga = fgets($myfile);
             if(strpos($riga, '<div id=') > 0){

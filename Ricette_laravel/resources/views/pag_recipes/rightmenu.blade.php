@@ -1,6 +1,8 @@
 <section class="menulateraledestro">
     <div id="rightmenu" class="rightm" >
-        <a>5 Ricette</a>
+        <img id="five" src="recipes1.png" style="width: 12%; height: 7%; float:right; margin-top: 1%;  margin-right: 1%"/>
+
+
 <a href="/singlerecipe/181"><u>le tortillas di farina</u>
     <img src="http://www.giallozafferano.it/images/ricette/6/631/foto_hd/hd650x433_wm.jpg"></a> </br> </br><a href="/singlerecipe/15"><u>la pizza senza glutine</u>
                         <img src="http://www.giallozafferano.it/images/ricette/16/1655/foto_hd/hd650x433_wm.jpg"></a> </br> </br><a href="/singlerecipe/117"><u>i samosa di tonno</u>

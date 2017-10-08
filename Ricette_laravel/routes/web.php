@@ -32,6 +32,7 @@ Route::get('results', function () {
 
 Route::get('rightmenu', 'Home@getrandomrecipes');
 
+
 Route::get('singlerecipe/{number}', 'Home@stamponerecipe');
 
 Route::get('recipe', function () {
